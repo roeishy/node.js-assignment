@@ -3,6 +3,7 @@ const noteDAO = require('./note.DAO')
 
 module.exports = {
   query,
+  add
 };
 
 async function query() {
@@ -14,3 +15,14 @@ async function query() {
     throw err;
   }
 }
+
+async function add(payload) {
+  try {
+    const { title, content, author } = payload.data;
+    return noteDAO.createNote(title, content, author)
+  } catch (err) {
+    logger.error('cannot insert note', err);
+    throw err;
+  }
+}
+
