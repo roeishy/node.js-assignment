@@ -3,8 +3,19 @@ const noteDAO = require('./note.DAO')
 
 module.exports = {
   query,
-  add
+  add,
+  remove
 };
+
+async function remove(noteId) {
+  try {
+    noteDAO.deleteNote(noteId);
+    return noteId;
+  } catch (err) {
+    logger.error(`cannot remove note ${noteId}`, err);
+    throw err;
+  }
+}
 
 async function query() {
   try {
