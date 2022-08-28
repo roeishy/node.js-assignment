@@ -1,0 +1,103 @@
+openapi: 3.0.3
+info:
+  title: note keeper API
+  contact:
+    name: Roei Sh
+    email: roeishy3@gmail.com
+  version: 1.0.0
+servers:
+  - url: https://localhost:3030
+paths:
+  /api/note:
+    post:
+      tags:
+        - note
+      summary: Add a new note
+      description: Add a new note
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/note_to_save'
+      responses:
+        200:
+          description: the new note id
+          content:
+            id:
+              type: integer
+              example: 4
+                  
+    get:
+      tags:
+        - note
+      summary: gets all of the notes
+      description: gets all of the notes
+      responses:
+        200:
+          description: got all of the notes successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      items:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/saved_note'
+  /api/note/:id :
+    post:
+      tags:
+        - note
+      summary: remove a note
+      description: remove a note by changing his 'is deleted' propetry to true
+      parameters:
+        - in: query
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: the note id
+          content:
+            id:
+              type: integer
+              example: 4
+components:
+  schemas:
+    saved_note:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 4
+        title:
+          type: string
+          example: grocery store list
+        content:
+          type: string
+          example: banana, milk, tuna
+        author:
+          type: string
+          example: Roei
+        date:
+          type: string
+          example: 2022-08-27T17:39:15.859Z
+    note_to_save:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+              title:
+                type: string
+                example: grocery store list
+              content:
+                type: string
+                example: banana, milk, tuna
+              author:
+                type: string
+                example: Roei

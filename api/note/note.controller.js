@@ -16,7 +16,10 @@ async function removeNote(req, res) {
   } catch (err) {
     logger.error('Failed to remove note', err)
     res.status(500).send({ err: 'Failed to remove note' })
+  }
+}
 
+// GET ALL
 async function getNotes(req, res) {
   try {
     const notes = await noteService.query()
@@ -24,7 +27,8 @@ async function getNotes(req, res) {
   } catch (err) {
     logger.error('Failed to get notes', err)
     res.status(500).send({ err: 'Failed to get notes' })
-
+  }
+}
 // CREATE
 async function addNote(req, res) {
   try {
