@@ -1,8 +1,8 @@
 const express = require('express')
 const router = express.Router()
-const { addNote } = require('./note.controller')
+const { getNotes,addNote } = require('./note.controller')
 
-
+router.get('/', getNotes)
 router.post('/', addNote)
 
 
